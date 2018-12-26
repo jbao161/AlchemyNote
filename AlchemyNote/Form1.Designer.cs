@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("My first note");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("My Notebook", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("My first note");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("My Notebook", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_mainwindow));
             this.menubar_main = new System.Windows.Forms.MenuStrip();
             this.menubar_file = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +66,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menubar_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitwindow_main)).BeginInit();
             this.splitwindow_main.Panel1.SuspendLayout();
@@ -77,6 +79,7 @@
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menubar_main
@@ -225,7 +228,7 @@
             // 
             // splitwindow_main.Panel2
             // 
-            this.splitwindow_main.Panel2.Controls.Add(this.richTextBox1);
+            this.splitwindow_main.Panel2.Controls.Add(this.tabControl1);
             this.splitwindow_main.Size = new System.Drawing.Size(800, 373);
             this.splitwindow_main.SplitterDistance = 257;
             this.splitwindow_main.TabIndex = 1;
@@ -235,12 +238,12 @@
             this.treeview_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeview_main.Location = new System.Drawing.Point(0, 0);
             this.treeview_main.Name = "treeview_main";
-            treeNode1.Name = "note.001.0001";
-            treeNode1.Text = "My first note";
-            treeNode2.Name = "notebook_default";
-            treeNode2.Text = "My Notebook";
+            treeNode9.Name = "note.001.0001";
+            treeNode9.Text = "My first note";
+            treeNode10.Name = "notebook_default";
+            treeNode10.Text = "My Notebook";
             this.treeview_main.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode10});
             this.treeview_main.Size = new System.Drawing.Size(257, 373);
             this.treeview_main.TabIndex = 0;
             this.treeview_main.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeview_main_AfterSelect);
@@ -380,14 +383,36 @@
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 0;
             // 
-            // richTextBox1
+            // tabControl1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(539, 373);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(539, 373);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(531, 344);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(531, 344);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // form_mainwindow
             // 
@@ -413,6 +438,7 @@
             this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -453,7 +479,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
