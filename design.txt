@@ -1,0 +1,6 @@
+new user creates new directory
+new notebook creates new folder under user directory
+new note creates an .RTF text file in the notebook folder
+
+selecting a note on the left panel opens the .RTF file in the right panel under a new tab
+double clicking the note opens a new text editor window
