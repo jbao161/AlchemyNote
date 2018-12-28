@@ -38,8 +38,11 @@ namespace AlchemyNote
 
         private void menuitem_newbook_Click(object sender, EventArgs e)
         {
-            
             System.IO.Directory.CreateDirectory(Properties.Settings.Default.save_directory + "\\"+"New notebook");
+            // reload all the nodes. this seems like a poor implementation to update changes to the system.
+            // i'm deleting all the nodes, then creating them anew. will there be memory leak?
+            treeview_main.Nodes.Clear();
+            PopulateTreeView();
         }
         private void PopulateTreeView()
         {
