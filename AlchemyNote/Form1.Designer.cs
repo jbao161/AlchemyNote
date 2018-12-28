@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("My first note");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("My Notebook", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("My first note");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("My Notebook", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_mainwindow));
             this.menubar_main = new System.Windows.Forms.MenuStrip();
             this.menubar_file = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,6 +125,7 @@
             this.menuitem_new.Name = "menuitem_new";
             this.menuitem_new.Size = new System.Drawing.Size(216, 26);
             this.menuitem_new.Text = "New";
+            this.menuitem_new.Click += new System.EventHandler(this.menuitem_new_Click);
             // 
             // menuitem_open
             // 
@@ -244,12 +245,12 @@
             this.treeview_main.ImageList = this.imageList1;
             this.treeview_main.Location = new System.Drawing.Point(0, 0);
             this.treeview_main.Name = "treeview_main";
-            treeNode1.Name = "note.001.0001";
-            treeNode1.Text = "My first note";
-            treeNode2.Name = "notebook_default";
-            treeNode2.Text = "My Notebook";
+            treeNode3.Name = "note.001.0001";
+            treeNode3.Text = "My first note";
+            treeNode4.Name = "notebook_default";
+            treeNode4.Text = "My Notebook";
             this.treeview_main.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
             this.treeview_main.SelectedImageIndex = 0;
             this.treeview_main.Size = new System.Drawing.Size(257, 373);
             this.treeview_main.TabIndex = 0;

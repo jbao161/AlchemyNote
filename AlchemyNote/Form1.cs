@@ -13,19 +13,26 @@ namespace AlchemyNote
 {
     public partial class form_mainwindow : Form
     {
+        string current_directory, current_user, current_notebook, current_note;
+        string savenote_ext;
+        TreeNode root_node;
+
         public form_mainwindow()
         {
             InitializeComponent();
-            
-
-            Properties.Settings.Default.user_name = System.Environment.UserName;
-            Properties.Settings.Default.save_directory = 
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                + "\\AlchemyNote" + "\\" + Properties.Settings.Default.user_name;
-
+            AlchemyNote_Setup();
             PopulateTreeView();
         }
-
+        private void AlchemyNote_Setup()
+        {
+            Properties.Settings.Default.user_name = System.Environment.UserName;
+            Properties.Settings.Default.save_directory =
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                + "\\AlchemyNote";
+            current_directory = Properties.Settings.Default.save_directory;
+            current_user = Properties.Settings.Default.user_name;
+            savenote_ext = ".rtf";
+        }
         private void menuitem_open_Click(object sender, EventArgs e)
         {
 
@@ -34,22 +41,39 @@ namespace AlchemyNote
         private void treeview_main_AfterSelect(object sender, TreeViewEventArgs e)
         {
 
+            if (e.Node.Parent == null)
+            { // this is the user level folder. do nothing. don't create notes in it, only notebooks
+            }
+            // if a notebook is selected, remember to create new notes in it
+            else if (e.Node.Parent == root_node) { 
+                current_notebook = e.Node.Text;
+                MessageBox.Show(current_notebook);
+            }
+            // if a note is selected, remember the notebook it is in
+            else if (e.Node.Parent.GetType() == typeof(TreeNode))
+            {
+                current_notebook = e.Node.Parent.Text;
+                MessageBox.Show(current_notebook);
+            }
         }
-
-        private void menuitem_newbook_Click(object sender, EventArgs e)
+        private void Reload_treeview()
         {
-            System.IO.Directory.CreateDirectory(Properties.Settings.Default.save_directory + "\\"+"New notebook");
             // reload all the nodes. this seems like a poor implementation to update changes to the system.
-            // i'm deleting all the nodes, then creating them anew. will there be memory leak?
+            // i'm deleting all the nodes, then creating them anew. will creating directoryinfo and treenodes each time cause memory leak?
             treeview_main.Nodes.Clear();
             PopulateTreeView();
+        }
+        private void menuitem_newbook_Click(object sender, EventArgs e)
+        {
+            System.IO.Directory.CreateDirectory(Properties.Settings.Default.save_directory + "\\"+ current_user + "\\"+"New notebook");
+            Reload_treeview();
         }
         private void PopulateTreeView()
         {
             TreeNode rootNode;
 
             DirectoryInfo info; //  = new DirectoryInfo(@"../..");
-            info = new DirectoryInfo(Properties.Settings.Default.save_directory);
+            info = new DirectoryInfo(Properties.Settings.Default.save_directory + "\\" + current_user);
        
             if (info.Exists)
             {
@@ -57,6 +81,7 @@ namespace AlchemyNote
                 rootNode.Tag = info;
                 GetDirectories(info.GetDirectories(), rootNode);
                 treeview_main.Nodes.Add(rootNode);
+                root_node = rootNode;
             }
         }
 
@@ -76,12 +101,42 @@ namespace AlchemyNote
                     GetDirectories(subSubDirs, aNode);
                 }
                 nodeToAddTo.Nodes.Add(aNode);
+                GetFiles(subDir, aNode);
             }
         }
+        void GetFiles(DirectoryInfo d, TreeNode node)
 
+        {
+
+            FileInfo[] subfileInfo = d.GetFiles("*.*");
+
+            if (subfileInfo.Length > 0)
+
+            {
+
+                for (int j = 0; j < subfileInfo.Length; j++)
+
+                {
+
+                    node.Nodes.Add(subfileInfo[j].Name);
+
+                }
+
+            }
+
+        }
         private void treeview_main_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             
+        }
+
+        private void menuitem_new_Click(object sender, EventArgs e)
+        {
+            string fileLoc = current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + "new note" + savenote_ext;
+            RichTextBox richTextBox1 = new RichTextBox();
+            richTextBox1.SaveFile(@fileLoc, RichTextBoxStreamType.RichText);
+            richTextBox1.Dispose();
+            Reload_treeview();
         }
     }
 }
