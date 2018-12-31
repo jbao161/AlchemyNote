@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("My first note");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("My Notebook", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_mainwindow));
             this.menubar_main = new System.Windows.Forms.MenuStrip();
             this.menubar_file = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +50,8 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuitem_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.splitwindow_main = new System.Windows.Forms.SplitContainer();
-            this.treeview_main = new System.Windows.Forms.TreeView();
+            this.Treeview_main = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -70,7 +68,6 @@
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menubar_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitwindow_main)).BeginInit();
             this.splitwindow_main.Panel1.SuspendLayout();
@@ -123,102 +120,102 @@
             // menuitem_new
             // 
             this.menuitem_new.Name = "menuitem_new";
-            this.menuitem_new.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_new.Size = new System.Drawing.Size(199, 26);
             this.menuitem_new.Text = "New";
-            this.menuitem_new.Click += new System.EventHandler(this.menuitem_new_Click);
+            this.menuitem_new.Click += new System.EventHandler(this.Menuitem_new_Click);
             // 
             // menuitem_open
             // 
             this.menuitem_open.Name = "menuitem_open";
-            this.menuitem_open.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_open.Size = new System.Drawing.Size(199, 26);
             this.menuitem_open.Text = "Open";
-            this.menuitem_open.Click += new System.EventHandler(this.menuitem_open_Click);
+            this.menuitem_open.Click += new System.EventHandler(this.Menuitem_open_Click);
             // 
             // menuitem_close
             // 
             this.menuitem_close.Name = "menuitem_close";
-            this.menuitem_close.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_close.Size = new System.Drawing.Size(199, 26);
             this.menuitem_close.Text = "Close";
             // 
             // menuitem_revert
             // 
             this.menuitem_revert.Name = "menuitem_revert";
-            this.menuitem_revert.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_revert.Size = new System.Drawing.Size(199, 26);
             this.menuitem_revert.Text = "Revert";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(196, 6);
             // 
             // menuitem_newbook
             // 
             this.menuitem_newbook.Name = "menuitem_newbook";
-            this.menuitem_newbook.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_newbook.Size = new System.Drawing.Size(199, 26);
             this.menuitem_newbook.Text = "New Notebook";
-            this.menuitem_newbook.Click += new System.EventHandler(this.menuitem_newbook_Click);
+            this.menuitem_newbook.Click += new System.EventHandler(this.Menuitem_newbook_Click);
             // 
             // menuitem_openbook
             // 
             this.menuitem_openbook.Name = "menuitem_openbook";
-            this.menuitem_openbook.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_openbook.Size = new System.Drawing.Size(199, 26);
             this.menuitem_openbook.Text = "Open Notebook";
             // 
             // menuitem_closebook
             // 
             this.menuitem_closebook.Name = "menuitem_closebook";
-            this.menuitem_closebook.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_closebook.Size = new System.Drawing.Size(199, 26);
             this.menuitem_closebook.Text = "Close Notebook";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(196, 6);
             // 
             // deleteNoteToolStripMenuItem
             // 
             this.deleteNoteToolStripMenuItem.Name = "deleteNoteToolStripMenuItem";
-            this.deleteNoteToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.deleteNoteToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             this.deleteNoteToolStripMenuItem.Text = "Delete Note";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
             this.deleteToolStripMenuItem.Text = "Delete Notebook";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(196, 6);
             // 
             // menuitem_save
             // 
             this.menuitem_save.Name = "menuitem_save";
-            this.menuitem_save.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_save.Size = new System.Drawing.Size(199, 26);
             this.menuitem_save.Text = "Save Note";
             // 
             // menuitem_saveall
             // 
             this.menuitem_saveall.Name = "menuitem_saveall";
-            this.menuitem_saveall.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_saveall.Size = new System.Drawing.Size(199, 26);
             this.menuitem_saveall.Text = "Save All Notes";
             // 
             // menuitem_saveas
             // 
             this.menuitem_saveas.Name = "menuitem_saveas";
-            this.menuitem_saveas.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_saveas.Size = new System.Drawing.Size(199, 26);
             this.menuitem_saveas.Text = "Save Note As";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(196, 6);
             // 
             // menuitem_exit
             // 
             this.menuitem_exit.Name = "menuitem_exit";
-            this.menuitem_exit.Size = new System.Drawing.Size(216, 26);
+            this.menuitem_exit.Size = new System.Drawing.Size(199, 26);
             this.menuitem_exit.Text = "Exit";
             // 
             // splitwindow_main
@@ -229,7 +226,7 @@
             // 
             // splitwindow_main.Panel1
             // 
-            this.splitwindow_main.Panel1.Controls.Add(this.treeview_main);
+            this.splitwindow_main.Panel1.Controls.Add(this.Treeview_main);
             // 
             // splitwindow_main.Panel2
             // 
@@ -238,24 +235,26 @@
             this.splitwindow_main.SplitterDistance = 257;
             this.splitwindow_main.TabIndex = 1;
             // 
-            // treeview_main
+            // Treeview_main
             // 
-            this.treeview_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeview_main.ImageIndex = 0;
-            this.treeview_main.ImageList = this.imageList1;
-            this.treeview_main.Location = new System.Drawing.Point(0, 0);
-            this.treeview_main.Name = "treeview_main";
-            treeNode3.Name = "note.001.0001";
-            treeNode3.Text = "My first note";
-            treeNode4.Name = "notebook_default";
-            treeNode4.Text = "My Notebook";
-            this.treeview_main.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.treeview_main.SelectedImageIndex = 0;
-            this.treeview_main.Size = new System.Drawing.Size(257, 373);
-            this.treeview_main.TabIndex = 0;
-            this.treeview_main.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeview_main_AfterSelect);
-            this.treeview_main.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeview_main_NodeMouseClick);
+            this.Treeview_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Treeview_main.ImageIndex = 0;
+            this.Treeview_main.ImageList = this.imageList1;
+            this.Treeview_main.LabelEdit = true;
+            this.Treeview_main.Location = new System.Drawing.Point(0, 0);
+            this.Treeview_main.Name = "Treeview_main";
+            this.Treeview_main.SelectedImageIndex = 0;
+            this.Treeview_main.Size = new System.Drawing.Size(257, 373);
+            this.Treeview_main.TabIndex = 0;
+            this.Treeview_main.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.Treeview_main_AfterLabelEdit);
+            this.Treeview_main.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Treeview_main_AfterSelect);
+            this.Treeview_main.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Treeview_main_NodeMouseClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "TextTemplate.ico");
             // 
             // tabControl1
             // 
@@ -423,12 +422,6 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.helpToolStripButton.Text = "He&lp";
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "TextTemplate.ico");
-            // 
             // form_mainwindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -477,7 +470,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuitem_closebook;
         private System.Windows.Forms.ToolStripMenuItem menuitem_saveall;
         private System.Windows.Forms.SplitContainer splitwindow_main;
-        private System.Windows.Forms.TreeView treeview_main;
+        private System.Windows.Forms.TreeView Treeview_main;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem deleteNoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
