@@ -6,4 +6,6 @@ selecting a note on the left panel opens the .RTF file in the right panel under 
 double clicking the note opens a new text editor window
 
 TODO: 2018_12_31_13300845 
-check if file is open before renaming
+* check if file is open before renaming
+* change from treeview to two lists: one for notebooks, another for notes
+* option to add icon to the left of notes in the list for tagging

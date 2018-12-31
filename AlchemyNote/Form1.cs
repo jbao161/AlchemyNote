@@ -22,9 +22,9 @@ namespace AlchemyNote
                 "Debug (" + DateTime.Now.ToString("yyyy_MM_dd_HHmmssfff") + "): " + log_message);
         }
 
-        string current_directory, current_user, current_notebook, current_note;
-        string savenote_ext;
-        string directory_from, directory_to;
+        static public string current_directory, current_user, current_notebook, current_note;
+        static public string savenote_ext;
+        static public string directory_from, directory_to;
         TreeNode root_node;
 
         public form_mainwindow()
