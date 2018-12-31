@@ -4,3 +4,6 @@ new note creates an .RTF text file in the notebook folder
 
 selecting a note on the left panel opens the .RTF file in the right panel under a new tab
 double clicking the note opens a new text editor window
+
+TODO: 2018_12_31_13300845 
+check if file is open before renaming

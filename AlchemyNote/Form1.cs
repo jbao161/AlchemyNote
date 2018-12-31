@@ -18,13 +18,13 @@ namespace AlchemyNote
         [Conditional("DEBUG")]
         void Debug_console(string log_message)
         {
-            Console.Out.WriteLine(
+            if (doDebugOnlyCode) Console.Out.WriteLine(
                 "Debug (" + DateTime.Now.ToString("yyyy_MM_dd_HHmmssfff") + "): " + log_message);
         }
 
-        bool verbose = true;
         string current_directory, current_user, current_notebook, current_note;
         string savenote_ext;
+        string directory_from, directory_to;
         TreeNode root_node;
 
         public form_mainwindow()
@@ -35,10 +35,15 @@ namespace AlchemyNote
         }
         private void AlchemyNote_Setup()
         {
-            Properties.Settings.Default.user_name = System.Environment.UserName;
-            Properties.Settings.Default.save_directory =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            if (String.IsNullOrEmpty(Properties.Settings.Default.user_name))
+            {
+                Properties.Settings.Default.user_name = System.Environment.UserName;
+            }
+            if (String.IsNullOrEmpty(Properties.Settings.Default.save_directory))
+            {
+                Properties.Settings.Default.save_directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 + "\\AlchemyNote";
+            }
             current_directory = Properties.Settings.Default.save_directory;
             current_user = Properties.Settings.Default.user_name;
             savenote_ext = ".rtf";
@@ -75,7 +80,7 @@ namespace AlchemyNote
         }
         private void Menuitem_newbook_Click(object sender, EventArgs e)
         {
-            System.IO.Directory.CreateDirectory(Properties.Settings.Default.save_directory + "\\" + current_user + "\\" + "New notebook");
+            System.IO.Directory.CreateDirectory(current_directory + "\\" + current_user + "\\" + "New notebook");
             Reload_treeview();
         }
         private void PopulateTreeView()
@@ -83,7 +88,7 @@ namespace AlchemyNote
             TreeNode rootNode;
 
             DirectoryInfo info; //  = new DirectoryInfo(@"../..");
-            info = new DirectoryInfo(Properties.Settings.Default.save_directory + "\\" + current_user);
+            info = new DirectoryInfo(current_directory + "\\" + current_user);
 
             if (info.Exists)
             {
@@ -119,15 +124,57 @@ namespace AlchemyNote
         {
             try
             {
-                DirectoryInfo di = new DirectoryInfo(Properties.Settings.Default.save_directory + "\\" + current_user + "\\" + e.Node.Text);
-                //di.MoveTo(di.Parent + "\\" + e.Label);
-                System.IO.Directory.Move(@Properties.Settings.Default.save_directory + "\\" + current_user + "\\" + e.Node.Text, @Properties.Settings.Default.save_directory + "\\" + current_user + "\\" + e.Label);
+                // this is the user folder.
+                if (e.Node.Parent == null)
+                { 
+                    directory_from = current_directory + "\\" + e.Node.Text;
+                    directory_to = current_directory + "\\" + e.Label + "_tmp"; 
+                    // change to a temporary name before new name to avoid case sensitive problems
+                    System.IO.Directory.Move(@directory_from, @directory_to); 
+                    directory_from = current_directory + "\\" + e.Label + "_tmp";
+                    directory_to = current_directory + "\\" + e.Label;
+                    System.IO.Directory.Move(@directory_from, @directory_to);
+                    // store the changed settings
+                    current_user = e.Label;
+                    Properties.Settings.Default.user_name = current_user;
+                    Properties.Settings.Default.Save();
+                    Debug_console("User: \"" + e.Node.Text + "\" was renamed to \"" + current_user + "\"");
+                }
+                // this is a notebook
+                else if (e.Node.Parent == root_node)
+                {
+                    directory_from = current_directory + "\\" + current_user + "\\" + e.Node.Text;
+                    directory_to = current_directory + "\\" + current_user + "\\" + e.Label + "_tmp";
+                    System.IO.Directory.Move(@directory_from, @directory_to);
+                    directory_from = current_directory + "\\" + current_user + "\\" + e.Label + "_tmp";
+                    directory_to = current_directory + "\\" + current_user + "\\" + e.Label;
+                    System.IO.Directory.Move(@directory_from, @directory_to);
+                    current_notebook = e.Label;
+                    Debug_console("Notebook: \"" + e.Node.Text + "\" was renamed to \"" + current_notebook + "\"");
+                }
+                // this is a note
+                else if (e.Node.Parent.GetType() == typeof(TreeNode))
+                {
+                    directory_from = current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + e.Node.Text;
+                    directory_to = current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + e.Label + "_tmp";
+                    System.IO.File.Move(@directory_from, @directory_to);
+                    directory_from = current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + e.Label + "_tmp";
+                    directory_to = current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + e.Label;
+                    System.IO.File.Move(@directory_from, @directory_to);
+                    current_note = e.Label;
+                    Debug_console("Note: \"" + e.Node.Text + "\" in notebook: \"" + current_notebook
+                        + "\" was renamed to \"" + current_note + "\"" + "\" in notebook: \"" + current_notebook + "\"");
+                }
             }
             catch (Exception error)
             {
+                MessageBox.Show("Error (\"" + error.Source + "\"): Failed to change \"" + e.Node.Text + "\" to \"" + e.Label + "\"");
+                e.CancelEdit = true;
+
+                Debug_console(error.Source);
                 //Changing directory name failed
-                Console.Out.WriteLine(Properties.Settings.Default.save_directory + "\\" + current_user + "\\" + e.Node.Text + " e.Label New directory"); // new
-                Console.Out.WriteLine(e.Label + " e.Node.Text Old Directory"); // old
+                Console.Out.WriteLine(e.Node.Text + " old name");
+                Console.Out.WriteLine(e.Label + " new name");
             }
         }
 
