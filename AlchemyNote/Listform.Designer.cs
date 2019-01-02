@@ -31,14 +31,18 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView_notebooks = new System.Windows.Forms.ListView();
+            this.listView_notes = new System.Windows.Forms.ListView();
+            this.richTextBox_editor = new System.Windows.Forms.RichTextBox();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +69,10 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.richTextBox_editor);
             this.splitContainer1.Size = new System.Drawing.Size(800, 425);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 0;
@@ -77,19 +85,52 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.listView1);
+            this.splitContainer2.Panel1.Controls.Add(this.listView_notebooks);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.listView_notes);
             this.splitContainer2.Size = new System.Drawing.Size(266, 425);
             this.splitContainer2.SplitterDistance = 88;
             this.splitContainer2.TabIndex = 0;
             // 
-            // listView1
+            // listView_notebooks
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(88, 425);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView_notebooks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_notebooks.FullRowSelect = true;
+            this.listView_notebooks.HideSelection = false;
+            this.listView_notebooks.LabelEdit = true;
+            this.listView_notebooks.Location = new System.Drawing.Point(0, 0);
+            this.listView_notebooks.MultiSelect = false;
+            this.listView_notebooks.Name = "listView_notebooks";
+            this.listView_notebooks.Size = new System.Drawing.Size(88, 425);
+            this.listView_notebooks.TabIndex = 0;
+            this.listView_notebooks.UseCompatibleStateImageBehavior = false;
+            this.listView_notebooks.View = System.Windows.Forms.View.Details;
+            this.listView_notebooks.SelectedIndexChanged += new System.EventHandler(this.listView_notebooks_SelectedIndexChanged);
+            // 
+            // listView_notes
+            // 
+            this.listView_notes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_notes.FullRowSelect = true;
+            this.listView_notes.HideSelection = false;
+            this.listView_notes.Location = new System.Drawing.Point(0, 0);
+            this.listView_notes.MultiSelect = false;
+            this.listView_notes.Name = "listView_notes";
+            this.listView_notes.Size = new System.Drawing.Size(174, 425);
+            this.listView_notes.TabIndex = 0;
+            this.listView_notes.UseCompatibleStateImageBehavior = false;
+            this.listView_notes.View = System.Windows.Forms.View.Details;
+            this.listView_notes.SelectedIndexChanged += new System.EventHandler(this.listView_notes_SelectedIndexChanged);
+            // 
+            // richTextBox_editor
+            // 
+            this.richTextBox_editor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox_editor.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox_editor.Name = "richTextBox_editor";
+            this.richTextBox_editor.Size = new System.Drawing.Size(530, 425);
+            this.richTextBox_editor.TabIndex = 0;
+            this.richTextBox_editor.Text = "";
             // 
             // Listform
             // 
@@ -104,9 +145,11 @@
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -118,6 +161,8 @@
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView_notebooks;
+        private System.Windows.Forms.ListView listView_notes;
+        private System.Windows.Forms.RichTextBox richTextBox_editor;
     }
 }

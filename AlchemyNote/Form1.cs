@@ -123,7 +123,18 @@ namespace AlchemyNote
                 GetFiles(subDir, aNode);
             }
         }
+        void GetFiles(DirectoryInfo d, TreeNode node)
 
+        {
+            FileInfo[] subfileInfo = d.GetFiles("*.*");
+            if (subfileInfo.Length > 0)
+            {
+                for (int j = 0; j < subfileInfo.Length; j++)
+                {
+                    node.Nodes.Add(subfileInfo[j].Name);
+                }
+            }
+        }
         private void Treeview_main_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             try
@@ -182,18 +193,7 @@ namespace AlchemyNote
             }
         }
 
-        void GetFiles(DirectoryInfo d, TreeNode node)
 
-        {
-            FileInfo[] subfileInfo = d.GetFiles("*.*");
-            if (subfileInfo.Length > 0)
-            {
-                for (int j = 0; j < subfileInfo.Length; j++)
-                {
-                    node.Nodes.Add(subfileInfo[j].Name);
-                }
-            }
-        }
         private void Treeview_main_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
 

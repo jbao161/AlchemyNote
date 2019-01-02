@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -13,15 +14,24 @@ namespace AlchemyNote
 {
     public partial class Listform : Form
     {
+        private /*static*/ bool doDebugOnlyCode = true;
+        //[Conditional("DEBUG")]
+        void Debug_console(string log_message)
+        {
+            if (doDebugOnlyCode) Console.Out.WriteLine(
+                "Debug (" + DateTime.Now.ToString("yyyy_MM_dd_HHmmssfff") + "): " + log_message);
+        }
+
+        static public string current_directory, current_user, current_notebook, current_note;
+        static public string savenote_ext;
+        static public string directory_from, directory_to;
+
+
         public Listform()
         {
             InitializeComponent();
             AlchemyNote_Setup();
         }
-        static public string current_directory, current_user, current_notebook, current_note;
-        static public string savenote_ext;
-        static public string directory_from, directory_to;
-        TreeNode root_node;
 
         private void AlchemyNote_Setup()
         {
@@ -34,25 +44,80 @@ namespace AlchemyNote
                 Properties.Settings.Default.save_directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 + "\\AlchemyNote";
             }
+
             current_directory = Properties.Settings.Default.save_directory;
-            Directory.CreateDirectory(current_directory); // creates save directory only if it doesn't exist
             current_user = Properties.Settings.Default.user_name;
             savenote_ext = ".rtf";
+            Directory.CreateDirectory(current_directory + "\\" + current_user); // creates save directory only if it doesn't exist
+            Debug_console(current_directory);
+            Debug_console(current_user);
         }
+
+        private void listView_notebooks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView_notebooks.SelectedItems.Count > 0)
+            {
+                Debug_console(listView_notebooks.SelectedItems[0].Text);
+                current_notebook = listView_notebooks.SelectedItems[0].Text;
+                Notes_populate(current_directory + "\\" + current_user + "\\" + current_notebook);
+            }
+        }
+
+        private void listView_notes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView_notes.SelectedItems.Count > 0)
+            {
+                Debug_console(listView_notes.SelectedItems[0].Text);
+                current_note = listView_notes.SelectedItems[0].Text;
+                richTextBox_editor.LoadFile(current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + current_note + savenote_ext);
+            }
+        }
+
         private void Listform_Load(object sender, EventArgs e)
         {
-                listView1.Items.Clear();
+            Listview_setup();
+            Notebooks_populate(current_directory + "\\" + current_user);
+        }
 
-                string[] files = Directory.GetFiles(current_directory);
-                foreach (string file in files)
+        private void Listview_setup()
+        {
+            listView_notebooks.Columns.Add("Notebooks", -2, HorizontalAlignment.Left);
+            //listView_notebooks.HeaderStyle = ColumnHeaderStyle.None;
+            listView_notes.Columns.Add("Notes", -2, HorizontalAlignment.Left);
+            //listView_notes.HeaderStyle = ColumnHeaderStyle.None;
+        }
+
+        private void Notebooks_populate(string user_folder)
+        {
+            listView_notebooks.Items.Clear();
+
+            string[] folders = Directory.GetDirectories(user_folder);
+            foreach (string folder in folders)
+            {
+                string folderName = Path.GetFileName(folder);
+                ListViewItem item = new ListViewItem(folderName);
+                item.Tag = folder;
+
+                listView_notebooks.Items.Add(item);
+            }
+        }
+        private void Notes_populate(string notebook_folder)
+        {
+            listView_notes.Items.Clear();
+
+            string[] files = Directory.GetFiles(notebook_folder);
+            foreach (string file in files)
+            {
+                if (file.EndsWith(savenote_ext))
                 {
                     string fileName = Path.GetFileNameWithoutExtension(file);
                     ListViewItem item = new ListViewItem(fileName);
                     item.Tag = file;
 
-                    listView1.Items.Add(item);
+                    listView_notes.Items.Add(item);
                 }
             }
         }
     }
+}
 
