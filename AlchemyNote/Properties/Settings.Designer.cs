@@ -25,7 +25,7 @@ namespace AlchemyNote.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C://")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string save_directory {
             get {
                 return ((string)(this["save_directory"]));
@@ -37,7 +37,7 @@ namespace AlchemyNote.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Default User")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string user_name {
             get {
                 return ((string)(this["user_name"]));

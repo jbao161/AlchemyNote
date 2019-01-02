@@ -35,6 +35,7 @@ namespace AlchemyNote
                 + "\\AlchemyNote";
             }
             current_directory = Properties.Settings.Default.save_directory;
+            Directory.CreateDirectory(current_directory); // creates save directory only if it doesn't exist
             current_user = Properties.Settings.Default.user_name;
             savenote_ext = ".rtf";
         }

@@ -15,7 +15,7 @@ namespace AlchemyNote
     public partial class form_mainwindow : Form
     {
         private /*static*/ bool doDebugOnlyCode = true;
-        [Conditional("DEBUG")]
+        //[Conditional("DEBUG")]
         void Debug_console(string log_message)
         {
             if (doDebugOnlyCode) Console.Out.WriteLine(
@@ -44,9 +44,13 @@ namespace AlchemyNote
                 Properties.Settings.Default.save_directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 + "\\AlchemyNote";
             }
+
             current_directory = Properties.Settings.Default.save_directory;
             current_user = Properties.Settings.Default.user_name;
             savenote_ext = ".rtf";
+            Directory.CreateDirectory(current_directory + "\\" + current_user); // creates save directory only if it doesn't exist
+            Debug_console(current_directory);
+            Debug_console(current_user);
         }
         private void Menuitem_open_Click(object sender, EventArgs e)
         {
