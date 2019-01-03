@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listView_notebooks = new System.Windows.Forms.ListView();
             this.listView_notes = new System.Windows.Forms.ListView();
             this.richTextBox_editor = new System.Windows.Forms.RichTextBox();
+            this.timer_autosave = new System.Windows.Forms.Timer(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -126,11 +128,19 @@
             // richTextBox_editor
             // 
             this.richTextBox_editor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox_editor.HideSelection = false;
             this.richTextBox_editor.Location = new System.Drawing.Point(0, 0);
             this.richTextBox_editor.Name = "richTextBox_editor";
             this.richTextBox_editor.Size = new System.Drawing.Size(530, 425);
             this.richTextBox_editor.TabIndex = 0;
             this.richTextBox_editor.Text = "";
+            this.richTextBox_editor.TextChanged += new System.EventHandler(this.richTextBox_editor_TextChanged);
+            this.richTextBox_editor.Leave += new System.EventHandler(this.richTextBox_editor_Leave);
+            // 
+            // timer_autosave
+            // 
+            this.timer_autosave.Interval = 5000;
+            this.timer_autosave.Tick += new System.EventHandler(this.timer_autosave_Tick);
             // 
             // Listform
             // 
@@ -164,5 +174,6 @@
         private System.Windows.Forms.ListView listView_notebooks;
         private System.Windows.Forms.ListView listView_notes;
         private System.Windows.Forms.RichTextBox richTextBox_editor;
+        private System.Windows.Forms.Timer timer_autosave;
     }
 }

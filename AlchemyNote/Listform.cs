@@ -51,6 +51,7 @@ namespace AlchemyNote
             Directory.CreateDirectory(current_directory + "\\" + current_user); // creates save directory only if it doesn't exist
             Debug_console(current_directory);
             Debug_console(current_user);
+            timer_autosave.Interval = Properties.Settings.Default.autosave_delay_sec * 1000; // time in milliseconds to autosave
         }
 
         private void listView_notebooks_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +72,32 @@ namespace AlchemyNote
                 current_note = listView_notes.SelectedItems[0].Text;
                 richTextBox_editor.LoadFile(current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + current_note + savenote_ext);
             }
+        }
+
+        private void richTextBox_editor_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void richTextBox_editor_Leave(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.autosave) Save_note();
+        }
+     
+        private void richTextBox_editor_TextChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.autosave) timer_autosave.Start();
+        }
+        private void timer_autosave_Tick(object sender, EventArgs e)
+        {
+            Save_note();
+            Debug_console("Autosave: note \"" + current_note + "\" in notebook \"" + current_notebook + "\"");
+            timer_autosave.Stop();
+        }
+
+        private void Save_note()
+        {
+            richTextBox_editor.SaveFile(@current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + current_note + savenote_ext);
         }
 
         private void Listform_Load(object sender, EventArgs e)

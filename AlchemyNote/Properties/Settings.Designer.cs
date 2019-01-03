@@ -46,5 +46,29 @@ namespace AlchemyNote.Properties {
                 this["user_name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool autosave {
+            get {
+                return ((bool)(this["autosave"]));
+            }
+            set {
+                this["autosave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int autosave_delay_sec {
+            get {
+                return ((int)(this["autosave_delay_sec"]));
+            }
+            set {
+                this["autosave_delay_sec"] = value;
+            }
+        }
     }
 }
