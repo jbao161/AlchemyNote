@@ -16,7 +16,7 @@ namespace AlchemyNote
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Listform());
+            Application.Run(new AlchemyNote_listform());
             //Application.Run(new form_mainwindow());
         }
     }

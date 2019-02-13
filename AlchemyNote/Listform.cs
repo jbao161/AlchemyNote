@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AlchemyNote
 {
-    public partial class Listform : Form
+    public partial class AlchemyNote_listform : Form
     {
         private /*static*/ bool doDebugOnlyCode = true;
         //[Conditional("DEBUG")]
@@ -27,7 +27,7 @@ namespace AlchemyNote
         static public string directory_from, directory_to;
 
 
-        public Listform()
+        public AlchemyNote_listform()
         {
             InitializeComponent();
             AlchemyNote_Setup();
@@ -52,6 +52,9 @@ namespace AlchemyNote
             Debug_console(current_directory);
             Debug_console(current_user);
             timer_autosave.Interval = Properties.Settings.Default.autosave_delay_sec * 1000; // time in milliseconds to autosave
+
+            // add cut copy paste to richtextbox
+            richTextBox_editor.AddContextMenu();
         }
 
         private void listView_notebooks_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,7 +76,7 @@ namespace AlchemyNote
                 richTextBox_editor.LoadFile(current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + current_note + savenote_ext);
             }
         }
-
+    
         private void richTextBox_editor_KeyUp(object sender, KeyEventArgs e)
         {
 
