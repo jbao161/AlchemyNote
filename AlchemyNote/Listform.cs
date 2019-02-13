@@ -102,6 +102,13 @@ namespace AlchemyNote
         {
             richTextBox_editor.SaveFile(@current_directory + "\\" + current_user + "\\" + current_notebook + "\\" + current_note + savenote_ext);
         }
+        // Resize the listview to fit when the divider moves
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            // set the width of the first column to the width of the panel, subtracting the length of left and right margins.
+            listView_notebooks.Columns[0].Width = splitContainer_notesbooks.Panel1.Width - listView_notebooks.Margin.Left - listView_notebooks.Margin.Right;
+            listView_notes.Columns[0].Width = splitContainer_notesbooks.Panel2.Width- listView_notes.Margin.Left - listView_notes.Margin.Right;
+        }
 
         private void Listform_Load(object sender, EventArgs e)
         {
